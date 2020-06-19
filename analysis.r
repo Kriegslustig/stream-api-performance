@@ -14,8 +14,10 @@ for (time in syncResults$time) {
   results <- rbind(results, list(time=c(as.numeric(time)), type=c("sync")))
 }
 
-chart <- ggplot(results[results$type == "async",], aes(x=time, color=type)) +
-  scale_x_log10() +
+chart <- ggplot(results, aes(x=time, color=type)) +
+  scale_x_log10(labels = scales::label_number()) +
+  ylab("Density") +
+  xlab("Time (milliseconds)") +
   geom_density()
 
 print(chart)
